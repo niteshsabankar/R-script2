@@ -304,7 +304,7 @@ labeledHeatmap(Matrix = ME_cor,
             setStdMargins = FALSE, 
             cex.text = 1, 
             zlim = c(-1,1), 
-            main = paste("Module Eigengenes relationships"))
+            main = paste("Module Eigengenes relationships. x = E. huxleyi, y = G. Oceanica"))
 dev.off()
 
 #-------------------------------------------------------------------------------------
@@ -392,7 +392,7 @@ labeledHeatmap(Matrix = consensusCor,
             setStdMargins = FALSE, 
 			cex.text = 1,
        	    zlim = c(-1,1),
-	    	main = paste("G. Oceanica - E. huxleyi Module-trait relationships"))
+	    main = paste("G. Oceanica - E. huxleyi Module-trait relationships"))
 
 dev.off()
 #-------------------------------------------------------------------------------------
