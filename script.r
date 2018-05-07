@@ -17,8 +17,8 @@ datExprA1 <- datExprA1[isexpr, ]
 isexpr <- rowSums(datExprA2 > 10) >= 2
 datExprA2 <- datExprA2[isexpr, ]
 
-new <- data.frame(csv, datExprA1[match(csv$geph_ID, row.names(datExprA1)), ])   # add all columns of geph to csv and create 'new' matrix
-new <- data.frame(new, datExprA2[match(csv$ehux_ID, row.names(datExprA2)), ])
+new <- data.frame(csv, datExprA1[match(csv$geph_ID, row.names(datExprA1)), ])   # Add all columns of geph to
+new <- data.frame(new, datExprA2[match(csv$ehux_ID, row.names(datExprA2)), ])	# csv and create 'new' matrix
 
 rownames(new) <- new$ehux_ID
 
@@ -121,10 +121,7 @@ dev.off()
 
 #-------------------------------------------------------------------------------------
 
-softPower = readline(prompt = "Enter softPower Value (default 18): ")
-
-  if (substr(softPower, 1, 1) == "")
-    softPower = 18
+softPower = 18
 
 rankExprA1 = rank(rowMeans(datExprA1))
 rankExprA2 = rank(rowMeans(datExprA2))
@@ -260,12 +257,14 @@ mp=modulePreservation(multiData,
 stats = mp$preservation$Z$ref.A1$inColumnsAlsoPresentIn.A2
 stats[order(-stats[,2]),c(1:2)]
 
-no_modules = readline(prompt = "Enter number of module for analysis (default 10): ")
+write.csv(stats[order(-stats[,2]),c(1:2)], file = "PreservationTable.csv")
 
-  if (substr(no_modules, 1, 1) == "")
-    no_modules = 10
+#-------------------------------------------------------------------------------------
 
-topModules <- rownames(head(stats[order(-stats[,2]),c(1:2)], no_modules))
+noOfModules = 12	# Number of  top modules to be considered for
+					# module-trait correlation and Gene Enrichment Analysis
+
+topModules <- rownames(head(stats[order(-stats[,2]),c(1:2)], noOfModules))
 
 MEtopModules=character()
 index = 1
@@ -274,8 +273,6 @@ for (i in topModules) {
 	index <- index + 1
 }
 
-topModules <- strsplit(toString(topModules), ", ")[[1]]
-MEtopModules <- strsplit(toString(topModules), ", ")
 #-------------------------------------------------------------------------------------
 
 PCs1A = moduleEigengenes(t(datExprA1), colors = moduleColors)
@@ -285,7 +282,7 @@ PCs2A = moduleEigengenes(t(datExprA2), colors = moduleColors)
 ME_2A = PCs2A$eigengenes
 
 # Keep module Eigengenes of only 10 highly preserved modules
-ME_1A_preserved <- ME_1A[, MEtopModules[1]]
+ME_1A_preserved <- ME_1A[, MEtopModules]
 ME_2A_preserved <- ME_2A[, MEtopModules]
 
 #-------------------------------------------------------------------------------------
@@ -380,15 +377,14 @@ dev.off()
 # Variable Clist contains 10 highly preserved modules
 # Requires A1 and A2 directories already presernt in 'present working directory'
 
-modulesA1 <- datExprA1
+modulesA1 <- as.data.frame(datExprA1)
 modulesA1$module <- moduleColors
 
-modulesA2 <- datExprA2
+modulesA2 <- as.data.frame(datExprA2)
 modulesA2$module <- moduleColors
 
 
 for (i in topModules) {
-	
 	i <- noquote(i)
 	A1path <- paste("A1/", paste(i, "A1", sep = ""), sep = "")
 	A2path <- paste("A2/", paste(i, "A2", sep = ""), sep = "")
