@@ -287,6 +287,29 @@ ME_2A_preserved <- ME_2A[, MEtopModules]
 
 #-------------------------------------------------------------------------------------
 
+ME_cor <- cor(ME_1A_preserved, ME_2A_preserved, use = "p")
+MEPvalueA1 = corPvalueStudent(ME_cor, noOfModules)
+textME = paste(signif(ME_cor, 2), "\n(", signif(MEPvalueA1, 1), ")", sep = "")
+pdf("MECorrelation.pdf", height = 8, width = 10)
+par(mar = c(8,9,4,1)+.1)
+
+labeledHeatmap(Matrix = ME_cor,
+            xLabels = names(ME_2A_preserved),
+            xSymbols = names(ME_2A_preserved),
+            yLabels = names(ME_1A_preserved),
+            ySymbols = names(ME_1A_preserved),
+            colorLabels = FALSE,
+            colors = blueWhiteRed(50),
+            textMatrix = textME,
+            setStdMargins = FALSE, 
+            cex.text = 1, 
+            zlim = c(-1,1), 
+            main = paste("Module Eigengenes relationships"))
+dev.off()
+
+
+#-------------------------------------------------------------------------------------
+
 # For Geph
 moduleTraitCorA1 = cor(ME_1A_preserved, datTraits, use = "p")
 moduleTraitPvalueA1 = corPvalueStudent(moduleTraitCorA1, 8)
