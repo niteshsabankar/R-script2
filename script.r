@@ -1,3 +1,5 @@
+options(warn=-1)
+
 library("flashClust")
 library("WGCNA")
 library("DESeq2")
@@ -421,3 +423,4 @@ for (i in topModules) {
 		row.names = FALSE, 
 		quote = FALSE)
 }
+
