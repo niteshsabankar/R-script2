@@ -132,9 +132,9 @@ rankExprA2 = rank(rowMeans(datExprA2))
 pdf("generalNetworkProperties.pdf", height = 10, width = 12)
 par(mar = c(5,10,4,10)+.1)
 verboseScatterplot(rankExprA1,rankExprA2, 
-			xlab = "Ranked Expression (G. Oceanica)", 
-			ylab = "Ranked Expression (E. huxleyi)",
-			pch = 1)
+		xlab = "Ranked Expression (G. Oceanica)", 
+		ylab = "Ranked Expression (E. huxleyi)",
+		pch = 1)
 dev.off()
 
 adjacencyA1 = adjacency(t(datExprA1), power = softPower,type = "signed")
