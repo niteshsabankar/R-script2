@@ -175,12 +175,12 @@ scaledTOMSamples[[set]] = TOMScalingSamples[[set]]^scalePowers[set]
 
 pdf(file = "TOMScaling-QQPlot.pdf", wi = 6, he = 6)
 qqUnscaled = qqplot(TOMScalingSamples[[1]],
-					TOMScalingSamples[[2]], 
-					plot.it = TRUE, 
-					cex = 0.6,
-					xlab = paste("TOM in", setLabels[1]), 
-					ylab = paste("TOM in", setLabels[2]), 
-					main = "Q-Q plot of TOM", pch = 20)
+		TOMScalingSamples[[2]], 
+		plot.it = TRUE, 
+		cex = 0.6,
+		xlab = paste("TOM in", setLabels[1]), 
+		ylab = paste("TOM in", setLabels[2]), 
+		main = "Q-Q plot of TOM", pch = 20)
 
 qqScaled = qqplot(scaledTOMSamples[[1]], scaledTOMSamples[[2]], plot.it = FALSE)
 
@@ -205,45 +205,45 @@ plot(consTree, xlab = "", sub = "", main = "consensus Tree", labels = FALSE, han
 dev.off() 
 
 moduleLabels = cutreeDynamic(dendro = consTree,
-							distM = 1-consensusTOM,
-							deepSplit = 2,
-							cutHeight = 30,
-							minClusterSize = 30,
-							pamRespectsDendro = FALSE)
+			distM = 1-consensusTOM,
+			deepSplit = 2,
+			cutHeight = 30,
+			minClusterSize = 30,
+			pamRespectsDendro = FALSE)
 
 moduleColors = labels2colors(moduleLabels)
 table(moduleColors)
 
 pdf("Module_choices.pdf", height = 10, width = 14)
 plotDendroAndColors(consTree, 
-					moduleColors, 
-					"Dynamic Tree Cut",
-					dendroLabels = FALSE, 
-					hang = 0.03,
-					addGuide = TRUE, 
-					guideHang = 0.05)
+		moduleColors, 
+		"Dynamic Tree Cut",
+		dendroLabels = FALSE, 
+		hang = 0.03,
+		addGuide = TRUE, 
+		guideHang = 0.05)
 dev.off()
 
 #-------------------------------------------------------------------------------------
 
 pdf("Final_modules.pdf", height = 8, width = 12)
 plotDendroAndColors(geneTreeA1, 
-					moduleColors, 
-					"Modules", 
-					dendroLabels = FALSE, 
-					hang = 0.03, 
-					addGuide = TRUE,
-					guideHang = 0.05, 
-					main = "Gene dendrogram and module colors (G. Oceanica)")
+		moduleColors, 
+		"Modules", 
+		dendroLabels = FALSE, 
+		hang = 0.03, 
+		addGuide = TRUE,
+		guideHang = 0.05, 
+		main = "Gene dendrogram and module colors (G. Oceanica)")
 
 plotDendroAndColors(geneTreeA2, 
-					moduleColors, 
-					"Modules", 
-					dendroLabels = FALSE, 
-					hang = 0.03, 
-					addGuide = TRUE,
-					guideHang = 0.05, 
-					main = "Gene dendrogram and module colors (E. huxleyi)")
+		moduleColors, 
+		"Modules", 
+		dendroLabels = FALSE, 
+		hang = 0.03, 
+		addGuide = TRUE,
+		guideHang = 0.05, 
+		main = "Gene dendrogram and module colors (E. huxleyi)")
 dev.off() 
 
 #-------------------------------------------------------------------------------------
@@ -251,11 +251,11 @@ dev.off()
 multiData = list(A1 = list(data = t(datExprA1)), A2 = list(data = t(datExprA2)))
 multiColor = list(A1 = moduleColors)
 mp=modulePreservation(multiData,
-					multiColor, 
-					referenceNetworks = 1, 
-					verbose = 3, 
-					networkType = "signed", 
-					nPermutations = 30)
+		multiColor, 
+		referenceNetworks = 1, 
+		verbose = 3, 
+		networkType = "signed", 
+		nPermutations = 30)
 
 stats = mp$preservation$Z$ref.A1$inColumnsAlsoPresentIn.A2
 stats[order(-stats[,2]),c(1:2)]
@@ -301,16 +301,16 @@ pdf("heatmapA1.pdf", height = 6, width = 10)
 par(mar = c(5,9,4,1)+.1)
 
 labeledHeatmap(Matrix = moduleTraitCorA1,
-	            xLabels = names(datTraits),
-	            yLabels = names(ME_1A_preserved),
-	            ySymbols = names(ME_1A_preserved),
-	            colorLabels = FALSE,
-	            colors = blueWhiteRed(50),
-	            textMatrix = textMatrixA1,
-	            setStdMargins = FALSE, 
-	            cex.text = 1, 
-	            zlim = c(-1,1), 
-	            main = paste("G. Oceanica Module-trait relationships"))
+            xLabels = names(datTraits),
+            yLabels = names(ME_1A_preserved),
+            ySymbols = names(ME_1A_preserved),
+            colorLabels = FALSE,
+            colors = blueWhiteRed(50),
+            textMatrix = textMatrixA1,
+            setStdMargins = FALSE, 
+            cex.text = 1, 
+            zlim = c(-1,1), 
+            main = paste("G. Oceanica Module-trait relationships"))
 dev.off()
 
 # For Ehux
@@ -327,16 +327,16 @@ pdf("heatmapA2.pdf", height = 6, width = 10)
 par(mar = c(5,9,4,1)+.1)
 
 labeledHeatmap(Matrix = moduleTraitCorA2,
-	            xLabels = names(datTraits),
-	            yLabels = names(ME_2A_preserved),
-	            ySymbols = names(ME_2A_preserved),
-	            colorLabels = FALSE,
-	            colors = blueWhiteRed(50),
-	            textMatrix = textMatrixA2,
-	            setStdMargins = FALSE, 
-		        cex.text = 1,
-	            zlim = c(-1,1),
-	            main = paste("E. huxleyi Module-trait relationships"))
+            xLabels = names(datTraits),
+            yLabels = names(ME_2A_preserved),
+            ySymbols = names(ME_2A_preserved),
+            colorLabels = FALSE,
+            colors = blueWhiteRed(50),
+            textMatrix = textMatrixA2,
+            setStdMargins = FALSE, 
+	        cex.text = 1,
+            zlim = c(-1,1),
+            main = paste("E. huxleyi Module-trait relationships"))
 dev.off()
 
 #-------------------------------------------------------------------------------------
@@ -394,13 +394,13 @@ for (i in topModules) {
 	A2path <- paste("A2/", paste(i, "A2", sep = ""), sep = "")
 
 	write.table(rownames(modulesA1[grep(paste("^", i, "$", sep = ""), modulesA1$module),]), 
-				file = A1path, 
-				col.names = FALSE, 
-				row.names = FALSE, 
-				quote = FALSE)
+		file = A1path, 
+		col.names = FALSE, 
+		row.names = FALSE, 
+		quote = FALSE)
 	write.table(rownames(modulesA2[grep(paste("^", i, "$", sep = ""), modulesA2$module),]), 
-				file = A2path, 
-				col.names = FALSE, 
-				row.names = FALSE, 
-				quote = FALSE)
+		file = A2path, 
+		col.names = FALSE, 
+		row.names = FALSE, 
+		quote = FALSE)
 }
