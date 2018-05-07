@@ -307,7 +307,6 @@ labeledHeatmap(Matrix = ME_cor,
             main = paste("Module Eigengenes relationships"))
 dev.off()
 
-
 #-------------------------------------------------------------------------------------
 
 # For Geph
@@ -405,7 +404,6 @@ modulesA1$module <- moduleColors
 
 modulesA2 <- as.data.frame(datExprA2)
 modulesA2$module <- moduleColors
-
 
 for (i in topModules) {
 	i <- noquote(i)
