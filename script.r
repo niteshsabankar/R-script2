@@ -6,8 +6,8 @@ library("DESeq2")
 
 datExprA1 <- read.table("Data/geph-original", header = TRUE, row.names = 1, sep = "\t")		# Read G. Oceanica RNA-seq file
 datExprA2 <- read.table("Data/ehux-original", header = TRUE, row.names = 1, sep = "\t")		# Read E. huxleyi RNA-seq file
-datTraits <- read.csv("Data/datTraits.csv", row.names = 1)									# Read traits file
-csv  <- read.csv("Data/Ehux_JGI_blastp_GCA_90.csv", header=TRUE)							# Read gene match file
+datTraits <- read.csv("Data/datTraits.csv", row.names = 1)					# Read traits file
+csv  <- read.csv("Data/Ehux_JGI_blastp_GCA_90.csv", header=TRUE)				# Read gene match file
 
 csv <- csv[!duplicated(csv[, "geph_ID"]), ]													# Remove duplicates from matched genes
 
@@ -282,7 +282,7 @@ MEtopModules=character()
 index = 1
 for (i in topModules) {
 	MEtopModules[index] <-  paste("ME", i, sep = "")		# Add string 'ME' to before each module 
-	index <- index + 1										# for module eigengene calculations and graph
+	index <- index + 1						# for module eigengene calculations and graph
 }
 
 #-------------------------------------------------------------------------------------
