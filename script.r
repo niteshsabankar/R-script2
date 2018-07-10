@@ -4,7 +4,7 @@ library("DESeq2")
 
 enableWGCNAThreads()
 
-outputDir <- "blastp_90_merged_3/"
+outputDir <- "blastp_90_merged/"
 merged = T
 dir.create(outputDir)
 ### 1. Data pre-processing ### 
